@@ -84,6 +84,9 @@ size_t varint_size(varint_t v UNNEEDED)
  * populate the PSBT object */
 static const char *raw_tx = "0200000000010151d12aa54cc6e59a6a92325a8315e93361d9805115a13aa5ba8dbcf30ffd858c000000001716001401fad90abcd66697e2592164722de4a95ebee165fdffffff02603c250200000000160014c2ccab171c2a5be9dab52ec41b825863024c546600093d00000000002200205b8cd3b914cf67cdd8fa6273c930353dd36476734fbd962102c2df53b90880cd02473044022001e73b1745d775521c758e70549ad79b1d076efc34303f416e66ff630f6088e402207b0aa44b35329ae4733463bc9f6ca433c5595f00a902a21c941945a24f8aa577012103d745445c9362665f22e0d96e9e766f273f3260dea39c8a76bfa05dd2684ddccf66000000";
 
+
+struct wally_psbt;
+
 int main(int argc, char *argv[])
 {
 	struct bitcoin_tx *tx, *tx2;
@@ -111,6 +114,9 @@ int main(int argc, char *argv[])
 	const struct wally_map_item *final_scriptsig = wally_map_get_integer(&tx2->psbt->inputs[0].psbt_fields, /* PSBT_IN_FINAL_SCRIPTSIG */ 0x07);
 	assert(final_scriptsig->value_len > 0);
 	assert(tx2->psbt->inputs[0].final_witness != NULL);
+
+
+	printf("TX---: %s", fmt_wally_psbt(tmpctx, tx2->psbt));
 
 	common_shutdown();
 	return 0;

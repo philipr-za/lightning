@@ -161,6 +161,9 @@ int main(int argc, const char *argv[])
 	      "0204096eb817f7efb414ef4d3d8be39dd04374256d3b054a322d4a6ee22736d0"
 	      "3b");
 
+	//printf("TX: %s", fmt_bitcoin_tx())
+
+
 	tal_free(tx);
 	common_shutdown();
 	return 0;

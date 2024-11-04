@@ -385,8 +385,11 @@ bool psbt_has_required_fields(struct wally_psbt *psbt)
 		const struct wally_tx_output *txout;
 		struct wally_psbt_input *input = &psbt->inputs[i];
 
-		if (!psbt_get_serial_id(&input->unknowns, &serial_id))
+		if (!psbt_get_serial_id(&input->unknowns, &serial_id)) {
+			
+	
 			return false;
+		}
 
 		/* Required because we send the full tx over the wire now */
 		if (!input->utxo)

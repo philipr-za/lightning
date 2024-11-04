@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Use default timeout if none set
+: ${TIMEOUT:=300}
+
+THETEST=$1
+
+rm -rf /root/lightning/TESTDIR
+mkdir /root/lightning/TESTDIR
+
+export \
+PYTHONPATH=\
+$PWD/contrib/pyln-client:\
+$PWD/contrib/pyln-testing:\
+$PWD/contrib/pyln-proto \
+TEST_KEEPDIR=1 \
+TEST_DEBUG=1 \
+DEVELOPER=1 \
+SLOW_MACHINE=0 \
+RUST_BACKTRACE=1 \
+TEST_DIR="/root/lightning/TESTDIR" \
+&& pytest \
+$THETEST \
+-vvv
+
